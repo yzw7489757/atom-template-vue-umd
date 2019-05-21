@@ -6,12 +6,7 @@ const constantRouterMap = [
   {
     path: '/',
     component: () => import('@/views/home/index.vue').then(e => e.default),
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login/index.vue').then(e => e.default),
-  },
+  }
 ];
 
 const router = new Router({

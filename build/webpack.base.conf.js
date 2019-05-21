@@ -14,9 +14,12 @@ const PROHtmlPlugins = () => {
         collapseWhitespace: true,
         removeAttributeQuotes: true,
       },
+      // favicon:path.resolve(__dirname, '../favicon.png'),
+      chunksSortMode:'none'
     })
   ] : [new HtmlWebpackPlugin({
-    template: path.resolve(__dirname, '../index.html')
+    template: path.resolve(__dirname, '../index.html'),
+    chunksSortMode:'none'
   })]
 }
 module.exports = {

@@ -5,7 +5,9 @@ const config = require('./webpack.base.conf');
 const env = require('../env.development')
 const path = require('path')
 const util = require('./util');
-module.exports = merge(config, {
+const devApi = require('../env.development')
+const portFinder = require('portfinder');
+const devConfig = merge(config,{
   devtool: 'cheap-module-eval-source-map', // 代码追踪
   devServer: {
     hot: true, // 热更新
@@ -15,15 +17,41 @@ module.exports = merge(config, {
     overlay: true,
     host: 'localhost',
     clientLogLevel: 'warning', // 控制台提示信息级别是 warning 以上
+    proxy:{
+      // 代理
+      '/api': {
+        target: devApi.VUE_APP_REQUEST_BASE_URL,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      },
+    },
   },
   plugins: [
-    new FriendlyErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': env
-    }),
-    new util.WebpackShellPlugin({
-      onBuildEnd: ['echo "\033[0;31mopen Browser: \'http://localhost:3000\'\033[0m"'] 
     })
   ]
-});
+})
+
+
+module.exports = new Promise((resolve, reject) => {
+  // 自动检测serve端口是否被占用,自增查找
+  portFinder.basePort = 3000;
+  portFinder.getPort((err, port) => {
+    if (err) {
+      reject(err)
+    } else {
+      devConfig.devServer.port = port
+      devConfig.plugins.push(new FriendlyErrorsPlugin({
+        compilationSuccessInfo: {
+          messages: [`running here: http://${devConfig.devServer.host}:${port}`],
+        },
+        onErrors:  undefined
+      }))
+      resolve(devConfig)
+    }
+  })
+})
