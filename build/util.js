@@ -74,9 +74,24 @@ const optimizeLoaders = (dir, name) => [{
   },
 ];
 
+function getIPAdress() {
+  // 获取本地ip 开启局域网访问
+  var interfaces = os.networkInterfaces();　　
+  for (var devName in interfaces) {　　　　
+      var iface = interfaces[devName];　　　　　　
+      for (var i = 0; i < iface.length; i++) {
+          var alias = iface[i];
+          if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+              return alias.address;
+          }
+      }　　
+  }
+}
+
 module.exports = {
   IS_PROD,
   resolve,
+  getIp:getIPAdress(),
   optimizeLoaders,
   eslint: getEslintRules(),
   cssLoaders: cssLoaders(),

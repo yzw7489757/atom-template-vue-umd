@@ -1,28 +1,28 @@
 import axios from 'axios';
 import router from '@/router';
 // import { getUserInfo } from '@/utils/auth'
-import store from '@/store';
+// import store from '@/store';
 
 // 重试次数
 axios.defaults.retry = 4;
 axios.defaults.retryDelay = 1000;
 
 // 配置切换路由取消请求,
-const { CancelToken } = axios
-const source = CancelToken.source()
-store.dispatch('ChangeRequestToken', source)
+// const { CancelToken } = axios //取消请求1
+// const source = CancelToken.source() //取消请求2
+// store.dispatch('ChangeRequestToken', source) //取消请求3
 
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_JAVA_REQUEST_BASE_URL,
   timeout: 30000,
-  cancelToken: source.token
+  // cancelToken: source.token //取消请求4
 });
 
 // request拦截器
 service.interceptors.request.use((config) => {
   // console.log('config: ', config)
-  config.cancelToken = store.getters.source.token
+  // config.cancelToken = store.getters.source.token //取消请求5
   if (sessionStorage.getItem('token')) {
     config.headers.token = sessionStorage.getItem('token'); // 让每个请求携带自定义token 请根据实际情况自行修改
   }
@@ -33,7 +33,7 @@ service.interceptors.request.use((config) => {
   Promise.reject(error);
 });
 
-// respone拦截器
+// response拦截器
 service.interceptors.response.use(
   (response) => {
     const res = response.data;

@@ -11,6 +11,7 @@ import i18n from './lang';
 import directive from '@/directive'
 import '@/icons';
 import '@/permission';
+import '@/components';
 
 Vue.config.productionTip = false;
 Vue.use(timeFormat);

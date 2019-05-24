@@ -32,7 +32,7 @@ const devConfig = merge(config,{
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': env
-    })
+    }),
   ]
 })
 
@@ -47,7 +47,7 @@ module.exports = new Promise((resolve, reject) => {
       devConfig.devServer.port = port
       devConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`running here: http://${devConfig.devServer.host}:${port}`],
+          messages: [`running here: http://${devConfig.devServer.host}:${port}`,`or LAN http://${util.getIp}:${port}`],
         },
         onErrors:  undefined
       }))

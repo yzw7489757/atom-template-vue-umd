@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="aaa">
     Home
+    <div class="vvv"></div>
   </div>
 </template>
 
@@ -11,5 +12,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.aaa{
+  color:red;
+  .vvv{
+    color:black;
+  }
+}
+.bbb{
+  color:white;
+}
 </style>
