@@ -12,13 +12,22 @@
 </template>
 
 <script>
+const typeMap = {
+  success: 'success',
+  info: 'info',
+  warning: 'warning',
+  error: 'error'
+};
 export default {
   name: 'message',
   data() {
     return {
       animateTime: 700, // 动画时间
       duration: 3000, // 显示的时间
-      show: false
+      show: false,
+      message: '',
+      timeout: null,
+      closed: false
     }
   },
   props: {
@@ -32,6 +41,11 @@ export default {
       default: ''
     }
   },
+  watch: {
+    closed(n) {
+      if (n) this.show = false;
+    }
+  },
   methods: {
     handleAfterLeave() {
       this.$destroy(true);
@@ -40,15 +54,30 @@ export default {
     clearTimer() {
       clearTimeout(this.timeout)
     },
+    close() {
+      this.closed = true;
+      if (typeof this.onClose === 'function') {
+        this.onClose(this);
+      }
+    },
     startTimer() {
       this.timeout = setTimeout(() => {
-        this.show = false
+        this.close()
       }, this.duration + this.animateTime);
+    },
+    keydown(e) {
+      if (e.keyCode === 27 && !this.closed) { // esc关闭消息
+        this.close();
+      }
     }
   },
   mounted() {
     this.show = true
     this.startTimer()
+    document.addEventListener('keydown', this.keydown);
+  },
+  beforeDestroy() {
+    document.removeEventListener('keydown', this.keydown);
   }
 };
 </script>

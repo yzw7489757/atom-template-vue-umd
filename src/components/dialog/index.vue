@@ -39,3 +39,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.dialog{
+  border:1px solid #e8e8e8;
+}
+</style>

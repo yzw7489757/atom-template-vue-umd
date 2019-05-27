@@ -48,7 +48,7 @@ module.exports = new Promise((resolve, reject) => {
       devConfig.devServer.port = port
       devConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`running here: http://${devConfig.devServer.host}:${port}`,`or LAN http://${util.getIp}:${port}`],
+          messages: [`\n\nApp running At: `,` - Local :http://${devConfig.devServer.host}:${port}`,` - LAN   :http://${util.getIp}:${port}\n,\nHappy development ^_^`],
         },
         onErrors:  undefined
       }))
