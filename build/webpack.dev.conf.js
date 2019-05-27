@@ -16,6 +16,7 @@ const devConfig = merge(config,{
     quiet: true, // 关闭 webpack-dev-server 的提示，用 friendly-error-plugin
     overlay: true,
     host: 'localhost',
+    overlay:{ warnings: false, errors: true },//出现编译error时，全屏覆盖显示
     clientLogLevel: 'warning', // 控制台提示信息级别是 warning 以上
     proxy:{
       // 代理

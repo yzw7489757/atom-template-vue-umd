@@ -31,6 +31,7 @@
   position: absolute;
 }
 
+// fade效果
 .slide-fade-enter-active {
     transition: all .3s ease;
   }
@@ -43,6 +44,7 @@
   opacity: 0;
 }
 
+// translateX效果
 .slide-right-enter-active,.slide-left-enter-active {
   transition: all .3s cubic-bezier(0.4, 0.7, 0.8, 0.9);
 }
@@ -66,3 +68,4 @@
   transform: translateX(500px);
   opacity: 0;
 }
+

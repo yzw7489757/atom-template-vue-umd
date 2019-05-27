@@ -3,9 +3,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const PurgeCssPlugin = require('purgecss-webpack-plugin')
 const { resolve } = require('./util');
 const productionGzipExtensions = ['js', 'css']
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const glob = require('glob')
 const webpack = require('webpack')
 const config = require('./webpack.base.conf');
 const env = require('../env.production')
@@ -43,7 +45,10 @@ module.exports = merge(config, {
       test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
       threshold: 10240,
       minRatio: 0.8
-    })
+    }),
+    new PurgeCssPlugin({
+      paths: glob.sync(`${resolve('src')}/**/*`,  { nodir: true }),
+    }),
   ],
   performance: {
     assetFilter: function(assetFilename) {
@@ -73,6 +78,12 @@ module.exports = merge(config, {
           priority: -20, // 优先级，-20 比 -10 要低，也就是在两者条件都满足下，会先采用 vendors 的分割规则
           reuseExistingChunk: true, // 表示是否使用已有的 chunk，如果为 true 则表示如果当前的 chunk 包含的模块已经被抽取出去了，那么将不会重新生成新的。
         },
+        styles: {
+          name: 'styles',
+          test: /\.(css|scss)$/,
+          chunks: 'all',
+          enforce: true
+        }
       },
     },
   }

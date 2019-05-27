@@ -2,18 +2,15 @@
 @import "./transition.scss";
 @import "./btn.scss";
 
-body {
-  font-family: "Hiragino Sans GB", "Noto Sans CJK SC", -apple-system, BlinkMacSystemFont, "PingFang SC",
-    "Helvetica Neue", "Microsoft Yahei", Tahoma, Simsun, sans-serif;
-}
 $family: "Hiragino Sans GB", "Noto Sans CJK SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue",
   "Microsoft Yahei", Tahoma, Simsun, sans-serif;
-html {
-  box-sizing: border-box;
+
+body {
+  font-family: $family;
 }
 
-.page {
-  padding: 15px 25px 30px;
+html {
+  box-sizing: border-box;
 }
 
 *,
@@ -52,22 +49,9 @@ a:hover {
 }
 
 
-@media (max-width: 576px) {
-  .col-hide {
-    display: none !important;
-  }
-}
-@media (max-width: 767px) {
-  .col-xm-hide {
-    display: none !important;
-  }
-}
-@media (max-width: 993px) {
-  .col-md-hide {
-    display: none !important;
-  }
-}
+
 .m {
+  // 移动端 兼容
   float: left;
   $class-prefix: col-;
   @for $n from 1 through 24 {
@@ -143,7 +127,65 @@ a:hover {
       }
     }
   }
+  @media (max-width: 576px) {
+    .col-hide {
+      display: none;
+    }
+  }
+  @media (max-width: 767px) {
+    .col-xm-hide {
+      display: none;
+    }
+  }
+  @media (max-width: 993px) {
+    .col-md-hide {
+      display: none;
+    }
+  }
 }
-ow {
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+
+/* loading 效果*/
+.y-loading {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom:0;
+  right:0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.95);
+  overflow: hidden;
 }
+// loading 仿Element-ui加载效果
+@keyframes y-loading-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.y-loading .y-loading-round {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #409EFF;
+  border-left-color: transparent;
+  animation: y-loading-rotate 1s linear infinite;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.y-loading-text{
+  position: absolute;
+  top:calc(50% + 50px);
+  left:50%;
+  font-size: 16px;
+  color:#409EFF;
+  transform: translate(-50%,-50%);
+}
+/* loading style over*/

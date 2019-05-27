@@ -1,9 +1,7 @@
+import loading from '@/directive/loading'
+
 const install = function (Vue) {
-  Vue.directive('mobile', {
-    inserted(el, binding, vnode) {
-      const { value, arg } = binding;
-    },
-  });
+  Vue.directive('loading', loading)
 };
 
 export default install;
