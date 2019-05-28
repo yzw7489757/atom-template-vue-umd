@@ -1,15 +1,25 @@
 /* eslint-disable prefer-destructuring */
+/** 两种调用方式 引入组件message.success('123');和this.$msg.success('123')
+*
+* @description xxxxxx
+* @author yuanziwen
+* @since 19/05/21
+*/
+
+
 import Vue from 'vue'
 import Message from './message.vue'
 
 // eslint-disable-next-line prefer-const
 function msg(type, text, callBack) {
   let msg
+  let duration
   if (typeof text === 'string') {
     msg = text
   } else if (text instanceof Object) {
     // 如果传进来的是对象配置
     msg = text.text || ''
+    duration = text.duration
   }
   const VueMessage = Vue.extend({
     components: { Message },
@@ -19,6 +29,11 @@ function msg(type, text, callBack) {
         props: {
           type,
           text: msg
+        },
+        data() {
+          return {
+            duration: duration || Message.data().duration
+          }
         }
       })
     }
