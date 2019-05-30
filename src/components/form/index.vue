@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: 'yForm',
-  componentName: 'yForm',
+  name: 'y-form',
+  componentName: 'y-form',
   provide() {
     return {
       form: this

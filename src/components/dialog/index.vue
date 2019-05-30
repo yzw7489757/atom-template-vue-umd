@@ -1,7 +1,6 @@
 <template>
   <div class="dialog">
     <div class="dialog__wrapper" v-if="visible" @clcik="closeModal">
-      <div class="dialog">
         <div class="dialog__header">
           <div class="dialog__title">{{ title }}</div>
         </div>
@@ -12,7 +11,6 @@
           <slot name="footer"></slot>
         </div>
       </div>
-    </div>
     <div class="modal" v-show="visible"></div>
   </div>
 </template>
@@ -42,5 +40,6 @@ export default {
 <style lang="scss" scoped>
 .dialog{
   border:1px solid #e8e8e8;
+  position: absolute;
 }
 </style>

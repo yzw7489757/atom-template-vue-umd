@@ -1,39 +1,14 @@
 @import "./mixin.scss";
 @import "./transition.scss";
 @import "./btn.scss";
+@import "./media.scss";
 
 $family: "Hiragino Sans GB", "Noto Sans CJK SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue",
   "Microsoft Yahei", Tahoma, Simsun, sans-serif;
-
 body {
   font-family: $family;
-}
-
-html {
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-div:focus {
-  outline: none;
-}
-
-a:focus,
-a:active {
-  outline: none;
-}
-
-a,
-a:focus,
-a:hover {
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .clearfix {
@@ -47,101 +22,15 @@ a:hover {
     height: 0;
   }
 }
-
-
-
-.m {
-  // 移动端 兼容
-  float: left;
-  $class-prefix: col-;
-  @for $n from 1 through 24 {
-    // 最小 - 576px
-    &.#{$class-prefix}#{$n} {
-      width: ($n / 24) * 100%;
-    }
-  }
-  $class-prefix: offset-;
-  @for $n from 1 through 24 {
-    &.#{$class-prefix}#{$n} {
-      margin-left: ($n / 24) * 100%;
-    }
-  }
-  @media (min-width: 577px) {
-    // 577-769
-    $class-prefix: col-xm-;
-    @for $n from 1 through 24 {
-      &.#{$class-prefix}#{$n} {
-        width: ($n / 24) * 100%;
-      }
-    }
-
-    $class-prefix: offset-xm-;
-    @for $n from 1 through 24 {
-      &.#{$class-prefix}#{$n} {
-        margin-left: ($n / 24) * 100%;
-      }
-    }
-  }
-  @media (min-width: 769px) {
-    // 770-993
-    $class-prefix: col-md-;
-    @for $n from 1 through 24 {
-      &.#{$class-prefix}#{$n} {
-        width: ($n / 24) * 100%;
-      }
-    }
-    $class-prefix: offset-md-;
-    @for $n from 1 through 24 {
-      &.#{$class-prefix}#{$n} {
-        margin-left: ($n / 24) * 100%;
-      }
-    }
-  }
-  @media (min-width: 993px) {
-    //993-1200
-    $class-prefix: col-lg-;
-    @for $n from 1 through 24 {
-      &.#{$class-prefix}#{$n} {
-        width: ($n / 24) * 100%;
-      }
-    }
-    $class-prefix: offset-lg-;
-    @for $n from 1 through 24 {
-      &.#{$class-prefix}#{$n} {
-        margin-left: ($n / 24) * 100%;
-      }
-    }
-  }
-  @media (min-width: 1201px) {
-    //1200 - 无限大
-    $class-prefix: col-xl-;
-    @for $n from 1 through 24 {
-      &.#{$class-prefix}#{$n} {
-        width: ($n / 24) * 100%;
-      }
-    }
-    $class-prefix: offset-xl-;
-    @for $n from 1 through 24 {
-      &.#{$class-prefix}#{$n} {
-        margin-left: ($n / 24) * 100%;
-      }
-    }
-  }
-  @media (max-width: 576px) {
-    .col-hide {
-      display: none;
-    }
-  }
-  @media (max-width: 767px) {
-    .col-xm-hide {
-      display: none;
-    }
-  }
-  @media (max-width: 993px) {
-    .col-md-hide {
-      display: none;
-    }
-  }
+:root{
+  --button-height:32px;
+  --font-size:14px;
+  --button-bg: white;
+  --button-active-bg: #eee;
+  --border-radius: 4px;
+  --color: #303133;
+  --border-color: #999;
+  --border-color-hover: #666;
 }
 
 /* loading 效果*/

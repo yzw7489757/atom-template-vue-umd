@@ -21,9 +21,8 @@ export default {
     // const round = document.createElement('div')
     // round.className = 'y-loading-round'
     const Round = Vue.extend({
-      components: { loadingCom },
       render(h) {
-        return h('loadingCom')
+        return h(loadingCom)
       }
     })
     const newRound = new Round();

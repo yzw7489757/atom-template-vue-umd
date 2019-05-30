@@ -32,7 +32,7 @@
 import Emitter from '@/components/formItem/emitter';
 
 export default {
-  name: 'Y-input',
+  name: 'y-input',
   mixins: [Emitter],
   data() {
     return {
@@ -111,7 +111,7 @@ export default {
       // vue 原生的方法 return 出去
       this.$emit('input', event.target.value);
       // 将当前的值发送到 aiFormItem 进行校验
-      this.dispatch('yFormItem', 'on-form-change', event.target.value)
+      this.dispatch('y-form-item', 'on-form-change', event.target.value)
     },
     /**
     * blur 事件
@@ -120,7 +120,7 @@ export default {
     handleBlur(event) {
       // vue 原生的方法 return 出去
       this.$emit('blur', event.target.value);
-      this.dispatch('yFormItem', 'on-form-blur', event.target.value)
+      this.dispatch('y-form-item', 'on-form-blur', event.target.value)
     }
 
   }

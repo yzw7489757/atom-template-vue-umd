@@ -46,7 +46,7 @@ module.exports = {
       {
         test: /\.js$/,
         use: [
-          ...util.optimizeLoaders('cache-babel', 'js'), // cache-loader 与 thread-loader
+          ...util.optimizeLoaders('cache-babel', 'js'),
           'babel-loader?cacheDirectory',
         ],
         include: util.resolve('src'),
@@ -54,7 +54,7 @@ module.exports = {
       {
         test: /\.vue$/,
         use: [
-          ...util.optimizeLoaders('cache-vue', 'vue'), // cache-loader 与 thread-loader
+          ...util.optimizeLoaders('cache-vue', 'vue'),
           {
             loader: 'vue-loader',
             options: {

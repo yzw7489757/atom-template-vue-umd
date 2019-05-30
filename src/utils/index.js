@@ -1,6 +1,13 @@
 /**
+* @description 工具函数库
+* @author YuanZiWen
+* @since 19/05/21
+*/
+
+
+/**
  * 时间戳转格式化时间
- *
+ * @params timestamp 时间戳
  * @returns yyyy-mm-dd hh:mm:ss
  */
 export function parseTime(time, cFormat) {
@@ -37,47 +44,12 @@ export function parseTime(time, cFormat) {
   })
   return timeStr
 }
+
 /**
- * 获取时间差
- *
- * @returns timestap
+ * 获取url参数
+ * @param {*} url地址
+ * @returns Object keys List
  */
-export function formatTime(time, option) {
-  time = +time * 1000
-  const d = new Date(time)
-  const now = Date.now()
-
-  const diff = (now - d) / 1000
-
-  if (diff < 30) {
-    return '刚刚'
-  }
-  if (diff < 3600) {
-    return `${Math.ceil(diff / 60)}分钟前`
-  }
-  if (diff < 3600 * 24) {
-    return `${Math.ceil(diff / 3600)}小时前`
-  }
-  if (diff < 3600 * 24 * 2) {
-    return '1天前'
-  }
-  if (option) {
-    return parseTime(time, option)
-  }
-  return (
-    `${d.getMonth()
-      + 1
-    }月${
-      d.getDate()
-    }日${
-      d.getHours()
-    }时${
-      d.getMinutes()
-    }分`
-  )
-}
-
-// 格式化时间
 export function getQueryObject(url) {
   url = url == null ? window.location.href : url
   const search = url.substring(url.lastIndexOf('?') + 1)
@@ -92,139 +64,18 @@ export function getQueryObject(url) {
   })
   return obj
 }
+
 /**
- *获取本月第一天时间戳
  *
- * @returns timestap
+ *  类似Object.assign
+ * @export
+ * @param {*} target 低优先级数据源
+ * @param {*} source 高优先级数据源
+ * @returns 合并数据
  */
-export function getCurrentMonthFirst() {
-  const date = new Date()
-  date.setDate(1)
-  date.setHours(0, 0, 0, 0)
-  return Date.parse(date)
-}
-/**
- * 获取上月第一天00:00:00
- *
- * @returns timestap
- */
-export function getCurrentMonthPreFLast() {
-  let year = new Date().getFullYear()
-  let month = new Date().getMonth()
-  if (month === 0) {
-    month = 12
-    year -= 1
-  }
-  if (month < 10) month = `0${month}`
-  if (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)) {
-    return Date.parse(new Date(`${year}/${month}/01 00:00:00`))
-  }
-  return Date.parse(new Date(`${year}-${month}-01 00:00:00`))
-}
-/**
- * 获取上月最后一天23:59:59
- *
- * @returns timestap
- */
-export function getCurrentMonthPreFirst() {
-  const nowdays = new Date()
-  let year = nowdays.getFullYear()
-  let month = nowdays.getMonth()
-  if (month === 0) {
-    month = 12
-    year -= 1
-  }
-  if (month < 10) month = `0${month}`
-  const myDate = new Date(year, month, 0)
-  if (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)) {
-    const lastDay = `${year}/${month}/${myDate.getDate()}`
-    return Date.parse(new Date(`${lastDay} 23:59:59`))
-  }
-  const lastDay = `${year}-${month}-${myDate.getDate()}`
-  return Date.parse(new Date(`${lastDay} 23:59:59`))
-}
-
-/**
- * 获取本月最后一天23:59:59时间戳
- *
- * @returns timestap
- */
-
-export function getCurrentMonthFLast() {
-  const date = new Date()
-  let year = date.getFullYear()
-  let month = date.getMonth() + 1
-  month++
-  if (month > 12) {
-    year++
-    month = 1
-  }
-  const newDate = new Date(year, month - 1, 1)
-  return Date.parse(new Date(newDate.getTime() - 1000))
-}
-
-/**
- *get getByteLen
- * @param {Sting} val input value
- * @returns {number} output value
- */
-export function getByteLen(val) {
-  let len = 0
-  for (let i = 0; i < val.length; i++) {
-    if (val[i].match(/[^\\x00-\\xff]/gi) != null) {
-      len += 1
-    } else {
-      len += 0.5
-    }
-  }
-  return Math.floor(len)
-}
-
-export function cleanArray(actual) {
-  const newArray = []
-  for (let i = 0; i < actual.length; i++) {
-    if (actual[i]) {
-      newArray.push(actual[i])
-    }
-  }
-  return newArray
-}
-
-export function param(json) {
-  if (!json) return ''
-  return cleanArray(
-    Object.keys(json).map((key) => {
-      if (json[key] === undefined) return ''
-      return `${encodeURIComponent(key)}=${encodeURIComponent(json[key])}`
-    })
-  ).join('&')
-}
-
-export function param2Obj(url) {
-  const search = url.split('?')[1]
-  if (!search) {
-    return {}
-  }
-  return JSON.parse(
-    `{"${
-      decodeURIComponent(search)
-        .replace(/"/g, '\\"')
-        .replace(/&/g, '","')
-        .replace(/=/g, '":"')
-    }"}`
-  )
-}
-
-export function html2Text(val) {
-  const div = document.createElement('div')
-  div.innerHTML = val
-  return div.textContent || div.innerText
-}
-
 export function objectMerge(target, source) {
   /* Merges two  objects,
      giving the last one precedence */
-
   if (typeof target !== 'object') {
     target = {}
   }
@@ -241,7 +92,14 @@ export function objectMerge(target, source) {
   })
   return target
 }
-
+/**
+ * 缓动滚屏
+ *
+ * @export
+ * @param {*} element 起点元素
+ * @param {*} to 终点位置
+ * @param {*} duration 过渡时间
+ */
 export function scrollTo(element, to, duration) {
   if (duration <= 0) return
   const difference = to - element.scrollTop
@@ -268,44 +126,6 @@ export function toggleClass(element, className) {
   element.className = classString
 }
 
-export const pickerOptions = [{
-  text: '今天',
-  onClick(picker) {
-    const end = new Date()
-    const start = new Date(new Date().toDateString())
-    end.setTime(start.getTime())
-    picker.$emit('pick', [start, end])
-  }
-},
-{
-  text: '最近一周',
-  onClick(picker) {
-    const end = new Date(new Date().toDateString())
-    const start = new Date()
-    start.setTime(end.getTime() - 3600 * 1000 * 24 * 7)
-    picker.$emit('pick', [start, end])
-  }
-},
-{
-  text: '最近一个月',
-  onClick(picker) {
-    const end = new Date(new Date().toDateString())
-    const start = new Date()
-    start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-    picker.$emit('pick', [start, end])
-  }
-},
-{
-  text: '最近三个月',
-  onClick(picker) {
-    const end = new Date(new Date().toDateString())
-    const start = new Date()
-    start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-    picker.$emit('pick', [start, end])
-  }
-}
-]
-
 export function getTime(type) {
   if (type === 'start') {
     return new Date().getTime() - 3600 * 1000 * 24 * 90
@@ -313,7 +133,7 @@ export function getTime(type) {
   return new Date(new Date().toDateString())
 }
 /**
- * 防抖
+ * 防抖，电梯等人，不定期运行，再次触发重置等待时间
  *
  * @returns null
  */
@@ -328,7 +148,6 @@ export function debounce(func, wait, immediate) {
   const later = function () {
     // 据上一次触发时间间隔
     const last = +new Date() - timestamp
-
     // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
     if (last < wait && last > 0) {
       timeout = setTimeout(later, wait - last)
@@ -357,7 +176,7 @@ export function debounce(func, wait, immediate) {
   }
 }
 /**
- * 防抖
+ * 防抖，电梯不等人，定期运行一次，再次触发不重置等待时间
  *
  * @returns null
  */
@@ -402,9 +221,11 @@ export function throttle(func, wait, options) {
   }
 }
 /**
- * This is just a simple version of deep copy
- * Has a lot of edge cases bug
- * If you want to use a perfect deep copy, use lodash's _.cloneDeep
+ *
+ *
+ * @export 深克隆 lodash.deepClone
+ * @param {*} source
+ * @returns Object
  */
 export function deepClone(source) {
   if (!source && typeof source !== 'object') {
@@ -421,13 +242,6 @@ export function deepClone(source) {
   return targetObj
 }
 
-export function uniqueArr(arr) {
-  return Array.from(new Set(arr))
-}
-
-export function isExternal(path) {
-  return /^(https?:|mailto:|tel:)/.test(path)
-}
 /**
  * 查询设备系统类型
  *
@@ -451,27 +265,6 @@ export function device() {
     isPc
   }
 }
-/**
- * 查询设备 必须是移动端，且小于768像素
- *
- * @export
- * @returns
- */
-export function isMobile() {
-  const userAgentInfo = navigator.userAgent
-  const Agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod']
-  let flag = false
-  for (let v = 0; v < Agents.length; v++) {
-    if (userAgentInfo.indexOf(Agents[v]) > 0) {
-      flag = true;
-      break
-    }
-  }
-  const width = window.document.documentElement.clientWidth || window.document.body.clientWidth
-  if (width > 768) flag = false
-  return flag
-}
-
 /**
  *
  * 数组对象排序
@@ -568,50 +361,6 @@ export function hexToRgb(str) {
   return sColor
 }
 
-export function colorList() {
-  // 颜色列表
-  const color = [
-    '#1890FF',
-    '#c213ad',
-    '#2FC25B',
-    '#FACC14',
-    '#F04864',
-    '#8543E0',
-    // "#FFD00F",
-    '#FF789D'
-  ]
-  return color
-}
-
-export function reg(type, str) {
-  let result = false
-  switch (parseInt(type)) {
-    case 1:
-      // 中英文1-10个字
-      result = new RegExp(/^[\u4e00-\u9fa5a-zA-Z]{1,10}$/).test(str)
-      break
-    case 2:
-      // 数字下划线中文英文 4-10个字
-      result = new RegExp(/^[\u4e00-\u9fa5_a-zA-Z0-9_]{4,10}$/).test(str)
-      break
-    case 3:
-      //  中英文下划线，1-20个字
-      result = new RegExp(/^[\u4e00-\u9fa5_a-zA-Z0-9_]{1,20}$/).test(str)
-      break
-    case 4:
-      result = new RegExp(/^[\u4e00-\u9fa5_a-zA-Z0-9_]{2,100}$/).test(str)
-      break
-    case 5:
-      //  创建账号，1-20个字
-      result = new RegExp(/^[a-zA-Z0-9_]{1,20}$/).test(str)
-      break
-    default:
-      window.console.log('没有任何匹配，type类型错误')
-      break
-  }
-  return result
-}
-
 /**
  * 深度搜索
  *
@@ -620,7 +369,6 @@ export function reg(type, str) {
  * @param {*} key 搜索的key名称,默认value
  * @returns 对应数组的下标路径
  */
-
 export function findPathDFS(source, goal, key) {
   // 因为会改变原数据，因此做深拷贝处理
   const dataSource = JSON.parse(JSON.stringify(source))

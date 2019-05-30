@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  name: 'y-button',
   props: {
     icon: {
       type: String
@@ -84,6 +85,7 @@ $plain-border-color:#dcdfe6;
   display: inline-block;
   cursor: pointer;
   outline: none;
+  border:1px solid transparent;
   justify-content: center;
   align-items: center;
   vertical-align: middle;
@@ -95,6 +97,12 @@ $plain-border-color:#dcdfe6;
   }
   &:active{
     outline: none;
+  }
+  &::-moz-focus-inner {
+    border: 0;
+  }
+  & + & {
+    margin-left: 10px;
   }
   &:hover {
     color: var(--border-color-hover);
@@ -120,48 +128,55 @@ $plain-border-color:#dcdfe6;
     color:$button-color;
     background-color:$primary;
     border-color:$primary;
-    &:active{
-      border: 1px solid $primary;
+    &:hover{
+      background-color:rgba($primary,.7);
+      border-color:rgba($primary,.7);
     }
   }
   &.info-button{
     color:$button-color-white;
     background-color:$info;
     border-color:$info;
-    &:active{
-      border: 1px solid $info;
+    &:hover{
+      background-color:rgba($info,.7);
+      border-color:rgba($info,.7);
     }
   }
   &.warning-button{
     color:$button-color-white;
     background-color:$warning;
     border-color:$warning;
-    &:active{
-      border: 1px solid $warning;
+    &:hover{
+      background-color:rgba($warning,.7);
+      border-color:rgba($warning,.7);
     }
   }
   &.danger-button{
     color:$button-color-white;
     background-color:$danger;
     border-color:$danger;
-    &:active{
-      border: 1px solid $danger;
+    &:hover{
+      background-color:rgba($danger,.7);
+      border-color:rgba($danger,.7);
     }
   }
   &.success-button{
     color:$button-color-white;
     background-color:$success;
     border-color:$success;
-    &:active{
-      border: 1px solid $success;
+
+    &:hover{
+      background-color:rgba($primary,.7);
+      border-color:rgba($primary,.7);
     }
   }
   &.plain-button{
     color:$button-color;
     background-color:$plain;
     border-color:$plain-border-color;
-    &:active{
-      border: 1px solid $plain-border-color;
+    &:hover{
+      background-color:rgba($plain,.7);
+      border-color:rgba($plain-border-color,.8);
     }
   }
   > .content {

@@ -5,6 +5,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const PurgeCssPlugin = require('purgecss-webpack-plugin')
+const UglifyJsPlugin = require("uglifyjs-3-webpack-plugin");
 const { resolve } = require('./util');
 const productionGzipExtensions = ['js', 'css']
 const glob = require('glob')
@@ -23,7 +24,6 @@ const getAnalyzerPlugin = () => {
 module.exports = merge(config, {
   bail: true, // 出现错误立即停止打包
   watch: false,
-  devtool: 'source-map', // 代码追踪
   plugins: [
     new CopyWebpackPlugin([
       {
@@ -38,6 +38,15 @@ module.exports = merge(config, {
     ...getAnalyzerPlugin(),
     new webpack.DefinePlugin({
       'process.env': env
+    }),
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        warnings: false,
+        ie8: false,
+        output: {
+          comments: false
+        }
+      }
     }),
     new CompressionWebpackPlugin({
       filename: '[path].gz[query]',

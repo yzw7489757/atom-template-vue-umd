@@ -24,19 +24,10 @@ module.exports = {
     filename: 'js/[name].[hash:8].js',
     library
   },
-  // output: {
-  //   path: path.join(rootPath, 'dist'),
-  //   filename: 'dll_[name].js',
-  //   library: "[name]_[hash]"
-// },
   plugins: [
     new webpack.DllPlugin({
       path: resolve('dist/[name]-manifest.json'),
       name: library
     }),
-    // new webpack.DllPlugin({
-    //     path: path.join(rootPath, "dist", "[name]-manifest.json"),
-    //     name: "[name]_[hash]"
-    // })
   ],
 };

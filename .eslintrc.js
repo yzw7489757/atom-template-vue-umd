@@ -42,6 +42,8 @@ module.exports = {
     'prefer-rest-params':0,
     'linebreak-style': ["off", "windows"],
     'consistent-return':0,
-    'eol-last':0
+    'eol-last':0,
+    'max-len':0,
+    'no-parsing-error':0
   }
 };

@@ -15,7 +15,7 @@ import Emitter from '@/components/formItem/emitter';
 import Schema from 'async-validator';
 
 export default {
-  name: 'yFormItem',
+  name: 'y-form-item',
   mixins: [Emitter],
   inject: ['form'],
   props: {
@@ -135,7 +135,7 @@ export default {
   mounted() {
     // 如果没有传入 prop，则无需校验，也就无需缓存
     if (this.prop) {
-      this.dispatch('yForm', 'on-form-item-add', this);
+      this.dispatch('y-form', 'on-form-item-add', this);
       // 设置初始值，以便在重置时恢复默认值
       this.initialValue = this.fieldValue;
       // 添加表单校验
@@ -144,7 +144,7 @@ export default {
   },
   // 组件销毁前，将实例从 Form 的缓存中移除
   beforeDestroy() {
-    this.dispatch('iForm', 'on-form-item-remove', this);
+    this.dispatch('y-form', 'on-form-item-remove', this);
   }
 };
 </script>
