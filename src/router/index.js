@@ -1,35 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Layout from '@/views/layout/Layout'
 
 Vue.use(Router);
-export const constantRouterMap = [
+const constantRouterMap = [
   {
     path: '/',
-    redirect: '/home'
-  },
-  {
-    path: '/home',
-    component: Layout,
-    name: 'home',
-    meta: {
-      title: '主页',
-    },
-    children: [
-      {
-        path: '1',
-        component: () => import('@/views/home'),
-        name: '1',
-        meta: {
-          title: '主页1',
-          noCache: true,
-          icon: 'home'
-        },
-      }
-    ]
-  },
+    component: () => import('@/views/home/index.vue').then(e => e.default),
+  }
 ];
-export const asyncRouterMap = []
+
 const router = new Router({
   // mode: 'history', // 后端支持可开
   scrollBehavior: () => ({

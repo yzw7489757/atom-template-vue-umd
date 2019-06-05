@@ -1,7 +1,7 @@
 import router from './index'
 import NProgress from 'nprogress'; // Progress 进度条
 import 'nprogress/nprogress.css';// Progress 进度条样式
-import { token } from '@/utils/auth'; // 验权
+import { getToken } from '@/utils/auth'; // 验权
 
 NProgress.configure({ showSpinner: false });
 

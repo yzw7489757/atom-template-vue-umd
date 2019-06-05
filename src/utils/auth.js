@@ -7,7 +7,7 @@
 
 const TokenKey = 'token'
 const UserInfoKey = 'userInfo'
-const menuKey = 'getMenuList'
+
 export const token = {
   get() {
     return sessionStorage.getItem(TokenKey)
@@ -29,18 +29,5 @@ export const getUserInfo = {
   },
   remove() {
     return sessionStorage.removeItem(UserInfoKey)
-  }
-
-}
-
-export const menu = {
-  get() {
-    return JSON.parse(sessionStorage.getItem(menuKey))
-  },
-  set(menuList) {
-    sessionStorage.setItem(menuKey, JSON.stringify(menuList))
-  },
-  remove() {
-    return sessionStorage.removeItem(menuKey)
   }
 }

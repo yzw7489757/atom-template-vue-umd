@@ -1,4 +1,4 @@
-export default {
+const user = {
   state: {
 
   },
@@ -7,7 +7,7 @@ export default {
     SET_TOKEN: (state, token) => {
 
     },
-    SET_USERINFO: (state, userInfo) => {
+    SET_USERINFO: (state, userinfo) => {
 
     },
   },
@@ -22,3 +22,5 @@ export default {
     }
   }
 }
+
+export default user
