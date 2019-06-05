@@ -11,9 +11,10 @@
     "type": "git"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --host 0.0.0.0 --progress --config build/webpack.dev.conf.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --host --progress --config build/webpack.dev.conf.js",
     "build": "cross-env NODE_ENV=production webpack --progress --config build/webpack.prod.conf.js",
-    "build-report": "cross-env NODE_ENV=production webpack --progress --color --report --config build/webpack.prod.conf.js"
+    "build-report": "cross-env NODE_ENV=production webpack --progress --color --report --config build/webpack.prod.conf.js",
+    "lint": "eslint --ext .js,.vue src --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -31,11 +32,13 @@
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.1",
     "dll-link-webpack-plugin": "^3.2.1",
+    "element-ui": "^2.9.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-import-resolver-webpack": "^0.11.1",
     "eslint-loader": "^2.1.2",
+    "eslint-plugin-html": "^5.0.5",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-vue": "^5.2.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",

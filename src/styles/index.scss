@@ -1,10 +1,10 @@
+@import "./var.scss";
 @import "./mixin.scss";
 @import "./transition.scss";
 @import "./btn.scss";
 @import "./media.scss";
+@import "./sidebar.scss";
 
-$family: "Hiragino Sans GB", "Noto Sans CJK SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue",
-  "Microsoft Yahei", Tahoma, Simsun, sans-serif;
 body {
   font-family: $family;
   -webkit-font-smoothing: antialiased;

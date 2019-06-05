@@ -95,5 +95,11 @@ module.exports = merge(config, {
         }
       },
     },
+  },
+  externals:{
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'element-ui': 'ELEMENT',
+    'vuex':'Vuex'
   }
 });
