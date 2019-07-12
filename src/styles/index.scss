@@ -1,6 +1,5 @@
 @import "./mixin.scss";
 @import "./transition.scss";
-@import "./btn.scss";
 @import "./media.scss";
 
 $family: "Hiragino Sans GB", "Noto Sans CJK SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue",
@@ -9,6 +8,17 @@ body {
   font-family: $family;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
+}
+
+:root{
+  --button-height:32px;
+  --font-size:14px;
+  --button-bg: white;
+  --button-active-bg: #eee;
+  --border-radius: 4px;
+  --color: #303133;
+  --border-color: #999;
+  --border-color-hover: #666;
 }
 
 .clearfix {
@@ -22,17 +32,6 @@ body {
     height: 0;
   }
 }
-:root{
-  --button-height:32px;
-  --font-size:14px;
-  --button-bg: white;
-  --button-active-bg: #eee;
-  --border-radius: 4px;
-  --color: #303133;
-  --border-color: #999;
-  --border-color-hover: #666;
-}
-
 /* loading 效果*/
 .y-loading {
   width: 100%;

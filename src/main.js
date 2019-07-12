@@ -1,9 +1,7 @@
 import Vue from 'vue';
 import App from './App';
-import router from './router';
-import timeFormat from '@/filter/timeFormat';
-import store from './store';
-import i18n from './lang';
+import router from '@/router';
+import store from '@/store';
 import directive from '@/directive'
 import '@/styles/index.scss';
 import '@/styles/reset.scss';
@@ -11,7 +9,6 @@ import '@/icons';
 import '@/router/handleRoute';
 import '@/components';
 
-Vue.use(timeFormat);
 Vue.use(directive)
 Vue.config.productionTip = false;
 // eslint-disable-next-line no-new
@@ -19,6 +16,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  i18n,
   render: h => h(App),
 });
