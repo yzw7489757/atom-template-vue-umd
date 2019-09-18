@@ -1,10 +1,12 @@
 const webpack = require('webpack');
+const path = require('path');
 const { dependencies } = require('../package');
 const { resolve } = require('./util');
-const library = '[name]_lib'
+
+const library = '[name]_lib';
 const vendors = Object.keys(dependencies);
 const excludeVendors = ['@babel/polyfill']; // 不打包进 vendor 的依赖
-const path = require('path')
+
 const rootPath = path.resolve(__dirname, '../');
 
 excludeVendors.forEach((dep) => {

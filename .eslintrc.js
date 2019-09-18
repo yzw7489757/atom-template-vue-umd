@@ -32,7 +32,7 @@ module.exports = {
     'func-names':0,
     'import/no-extraneous-dependencies':0,
     'import/prefer-default-export':0,
-    'semi':0,
+    'semi':1,
     'comma-dangle':0,
     'no-plusplus':0,
     'no-multi-assign':0,

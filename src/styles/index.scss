@@ -1,24 +1,13 @@
-@import "./mixin.scss";
-@import "./transition.scss";
+@import "./reset.scss";
 @import "./media.scss";
 
 $family: "Hiragino Sans GB", "Noto Sans CJK SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue",
   "Microsoft Yahei", Tahoma, Simsun, sans-serif;
+
 body {
   font-family: $family;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
-}
-
-:root{
-  --button-height:32px;
-  --font-size:14px;
-  --button-bg: white;
-  --button-active-bg: #eee;
-  --border-radius: 4px;
-  --color: #303133;
-  --border-color: #999;
-  --border-color-hover: #666;
 }
 
 .clearfix {
@@ -32,48 +21,3 @@ body {
     height: 0;
   }
 }
-/* loading 效果*/
-.y-loading {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom:0;
-  right:0;
-  z-index: 100;
-  background-color: rgba(255, 255, 255, 0.95);
-  overflow: hidden;
-}
-// loading 仿Element-ui加载效果
-@keyframes y-loading-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.y-loading .y-loading-round {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid #409EFF;
-  border-left-color: transparent;
-  animation: y-loading-rotate 1s linear infinite;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-.y-loading-text{
-  position: absolute;
-  top:calc(50% + 60px);
-  left:50%;
-  font-size: 16px;
-  color:#666;
-  transform: translate(-50%,-50%);
-}
-/* loading style over*/
