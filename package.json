@@ -66,7 +66,7 @@
     "webpackbar": "^4.0.0"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "core-js": "^2.6.5",
     "js-cookie": "^2.2.0",
     "nprogress": "^0.2.0",
